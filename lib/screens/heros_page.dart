@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:hero_resource/models/awesome_hero.dart';
 import 'package:hero_resource/provider/heros-provider.dart';
 import 'package:hero_resource/widgets/hero_row.dart';

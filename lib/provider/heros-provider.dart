@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:hero_resource/models/awesome_hero.dart';
-import "package:collection/collection.dart";
 
 class HeroProvider with ChangeNotifier {
   List<AwesomeHero> _hero_list = [
