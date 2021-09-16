@@ -93,6 +93,15 @@ class _HerosPageState extends State<HerosPage> {
                         onTap: () {
                           setState(() {
                             index = idx;
+                            if (idx == 0) {
+                              hero_list_default = hero_provider.hero_sorted_by_name;
+                            } else if (idx == 1) {
+                              hero_list_default =
+                                  hero_provider.hero_sorted_by_powers;
+                            } else {
+                              hero_list_default =
+                                  hero_provider.hero_sorted_by_rate;
+                            }
                           });
                         },
                         child: Text(sorting_list_otions[idx],
@@ -115,7 +124,8 @@ class _HerosPageState extends State<HerosPage> {
                 itemCount: hero_list_default.length,
                 itemBuilder: (context, idx) {
                   return GestureDetector(
-                      onTap: () => onTap(hero_list_default[idx]), child: HeroWidget(hero_list_default[idx]));
+                      onTap: () => onTap(hero_list_default[idx]),
+                      child: HeroWidget(hero_list_default[idx]));
                 }),
           ),
         ]),

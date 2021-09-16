@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:hero_resource/models/awesome_hero.dart';
+import "package:collection/collection.dart";
 
 class HeroProvider with ChangeNotifier {
   List<AwesomeHero> _hero_list = [
@@ -23,7 +24,7 @@ class HeroProvider with ChangeNotifier {
         5,
         "scientist has discovered a group of previously unknown subatomic particles, which he dubs “Pym particles.",
         "assets/images/superheros/antman.jpg",
-        ["  Physical power 💪", "Ant", "laser eyes"]),
+        [ "Ant", "laser eyes"]),
     AwesomeHero(
         "Aquaman",
         "controls the sea",
@@ -41,5 +42,9 @@ class HeroProvider with ChangeNotifier {
   ];
 
 
+  
   get hero_list => _hero_list;
+  get hero_sorted_by_name => _hero_list.sort((a,b)=> a.name.compareTo(b.name));
+  get hero_sorted_by_powers => _hero_list.sort((a,b)=> b.powers.length.compareTo(a.powers.length));
+  get hero_sorted_by_rate => _hero_list.sort((a,b)=> b.rate.compareTo(a.rate));
 }
