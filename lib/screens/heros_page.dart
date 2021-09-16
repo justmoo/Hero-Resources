@@ -14,22 +14,17 @@ class HerosPage extends StatefulWidget {
 
 class _HerosPageState extends State<HerosPage> {
   final ValueChanged<AwesomeHero> onTap;
+  var hero_list_default = heros_init;
+
   _HerosPageState(this.onTap);
-
-  bool sortOptions = false;
   int index = 0;
-  List<String> sorting_list_otions = ["By Name", "By Power", "By Rating"];
-
-  @override
-  void initState() {
-    sortOptions = true;
-  }
+  List<String> sorting_list_options = ["By Name", "By Power", "By Rating"];
 
   @override
   Widget build(BuildContext context) {
     var hero_provider = Provider.of<HeroProvider>(context);
 
-    var hero_list_default = hero_provider.hero_list;
+    
     return Scaffold(
         body: SingleChildScrollView(
       physics: ClampingScrollPhysics(),
@@ -58,6 +53,12 @@ class _HerosPageState extends State<HerosPage> {
                   height: 16,
                 ),
                 TextField(
+                  onChanged: (value) {
+                    hero_provider.searchForHeroByName(value);
+                    setState(() {
+                      hero_list_default = hero_provider.hero_searched;
+                    });
+                  },
                   style: TextStyle(fontSize: 20, height: 1),
                   decoration: InputDecoration(
                     hintText: "Search",
@@ -94,17 +95,18 @@ class _HerosPageState extends State<HerosPage> {
                           setState(() {
                             index = idx;
                             if (idx == 0) {
-                              hero_list_default = hero_provider.hero_sorted_by_name;
+                              hero_provider.sortbyName();
+                              hero_list_default = hero_provider.hero_list;
                             } else if (idx == 1) {
-                              hero_list_default =
-                                  hero_provider.hero_sorted_by_powers;
+                              hero_provider.sortbyPower();
+                              hero_list_default = hero_provider.hero_list;
                             } else {
-                              hero_list_default =
-                                  hero_provider.hero_sorted_by_rate;
+                              hero_provider.sortbyRate();
+                              hero_list_default = hero_provider.hero_list;
                             }
                           });
                         },
-                        child: Text(sorting_list_otions[idx],
+                        child: Text(sorting_list_options[idx],
                             style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -114,7 +116,7 @@ class _HerosPageState extends State<HerosPage> {
                       );
                     },
                     separatorBuilder: (context, idx) => SizedBox(width: 40),
-                    itemCount: sorting_list_otions.length),
+                    itemCount: sorting_list_options.length),
               )),
           Expanded(
             flex: 10,

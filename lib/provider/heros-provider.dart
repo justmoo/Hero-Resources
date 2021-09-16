@@ -24,7 +24,7 @@ class HeroProvider with ChangeNotifier {
         5,
         "scientist has discovered a group of previously unknown subatomic particles, which he dubs “Pym particles.",
         "assets/images/superheros/antman.jpg",
-        [ "Ant", "laser eyes"]),
+        ["Ant", "laser eyes"]),
     AwesomeHero(
         "Aquaman",
         "controls the sea",
@@ -40,11 +40,28 @@ class HeroProvider with ChangeNotifier {
         "assets/images/superheros/batman.jpeg",
         ["Physical power 💪 ", "flying ", "laser eyes"]),
   ];
-
-
-  
+  List<AwesomeHero> _searched_heros = [];
   get hero_list => _hero_list;
-  get hero_sorted_by_name => _hero_list.sort((a,b)=> a.name.compareTo(b.name));
-  get hero_sorted_by_powers => _hero_list.sort((a,b)=> b.powers.length.compareTo(a.powers.length));
-  get hero_sorted_by_rate => _hero_list.sort((a,b)=> b.rate.compareTo(a.rate));
+
+  get hero_searched => _searched_heros;
+
+  void searchForHeroByName(String searchedName) {
+    _searched_heros = _hero_list
+        .where((element) => element.name.contains(searchedName))
+        .toList();
+    notifyListeners();
+  }
+  void sortbyName(){
+    _hero_list.sort((a, b) => a.name.compareTo(b.name));
+     notifyListeners();
+  }
+  void sortbyPower(){
+
+   _hero_list.sort((a, b) => b.powers.length.compareTo(a.powers.length));
+     notifyListeners();
+  }
+  void sortbyRate(){
+    _hero_list.sort((a, b) => b.rate.compareTo(a.rate));
+     notifyListeners();
+  }
 }

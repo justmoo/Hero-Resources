@@ -13,7 +13,7 @@ class HeroWidget extends StatelessWidget {
         vertical: 2
       ),
       height: MediaQuery.of(context).size.height * 0.08 ,
-        margin: EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+        margin: EdgeInsets.symmetric(horizontal: 25, vertical: 4),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(12)),
             color: Colors.white,
